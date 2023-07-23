@@ -23,7 +23,7 @@ if [ ssh ${serverName} '[ -d "'"${repoPath}"'" ] && echo "True" || echo "False"'
     ssh ${serverName} 'cd '"${repoPath}"' && git commit -m "Initial Commit"'
     ssh ${serverName} "touch ${repoPath}/hooks/post-receive"
     ssh ${serverName} 'echo "git --work-tree='${webPath}' --git-dir='"${repoPath}"' checkout -f master" >> '"${repoPath}"'/hooks/post-receive'
-    ssh ${serverName} "chown -R www-data:www-data ${webPath}"
+    ssh ${serverName} 'echo "chown -R www-data:www-data '"${webPath}"'" >> '"${repoPath}"'/hooks/post-receive'
 fi
 
 if [ ssh ${serverName} '[ -d "'"${webPath}"'" ] && echo "True" || echo "False"' -eq "False" ]: then
