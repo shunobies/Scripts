@@ -1,9 +1,10 @@
 #!/bin/bash
+start="\$PATH"
 echo "Example: "
 echo $PATH | awk 'BEGIN{RS=":"}{print $0}'
-read -p 'Please enter path to be included in $PATH: ' uservar
+read -p 'Please enter path to be invluded in $PATH: ' uservar
 
-echo "${uservar}:$PATH" >> ~/.bashrc
+export PATH="$HOME/bin:$PATH"
+echo export PATH=\"${uservar}:${start}\" >> ~/.bashrc
 source ~/.bashrc
 echo $PATH | awk 'BEGIN{RS=":"}{print $0}'
-
