@@ -1,5 +1,5 @@
 #!/bin/bash
-my_path="/home/alex/www/timcomp/html"
+my_path="/var/www/timcomp"
 cd $my_path
 git init
 git branch -m master
