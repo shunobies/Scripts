@@ -1,4 +1,11 @@
 #!/bin/sh
+echo "Make Sure Git is installed Locally"
+sudo dpkg -l | awk '{print$ 2}' | grep --max-count 1 "git"
+
+if [ [ -z "git" ] ]: then
+    sudo apt-get install git -y
+fi
+
 echo "Assumes you have a ~/.ssh/config for your server"
 read -p "Server Name: " serverName
 read -p "Site Name no spaces" siteName
