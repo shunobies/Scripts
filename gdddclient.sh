@@ -54,7 +54,7 @@ else
 	touch ${FILE}
 	read -p 'Domain Name: ' mydomain
 	echo ${mydomain} >> ${FILE}
-	read -p 'Host Name: (Ex. Parked, www) ' myhostname
+	read -p 'Host Name: (Ex. @, CNAME, PTR) ' myhostname
 	echo ${myhostname} >> ${FILE}
 	read -p 'API Key: ' apikey
 	read -p 'API Secret: ' apisecret
