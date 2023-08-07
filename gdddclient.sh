@@ -12,7 +12,7 @@ if [ -d ${rootDir} ]; then
 else
 	mkdir ${rootDir}
 	FILE="${rootDir}gdddclient.conf"
-	logdest="${logDir}gdddclient.log"
+	logdest="${rootDir}gdddclient.log"
 fi
 
 if [ -f ${FILE} ]; then
