@@ -64,13 +64,11 @@ function actions () {
 	if [[ "$cron_entry" != *"$is_in_cron"* ]]; then
 		printf '%s\n' "$cron_entry" "$new_cron_entry" | crontab -
 	fi
-
-	# Attempting to log any directories that may occur during the cronjob run.
-	2>&1 >> $logdest
 }
 
 if [ -f ${FILE} ]; then
-	actions
+	# Execute function and log any errors that may occur during the cronjob run.
+	actions 2>&1 >> $logdest
 else
 	touch ${FILE}
 	read -p 'Domain Name: ' mydomain
@@ -82,5 +80,6 @@ else
 	echo ${apikey} >> ${FILE}
 	echo ${apisecret} >> ${FILE}
 	echo "Log file located at ${logdest}"
-	actions
+	# Execute function and log any errors that may occur during the cronjob run.
+	actions 2>&1 >> $logdest
 fi
