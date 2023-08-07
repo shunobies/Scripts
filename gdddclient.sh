@@ -64,7 +64,7 @@ function actions () {
 	if [[ "$cron_entry" != *"$is_in_cron"* ]]; then
 		printf '%s\n' "$cron_entry" "$new_cron_entry" | crontab -
 	fi
-	echo "${logdate}" && 2>&1 >> ${logdest}
+	${logdate}":" 2>&1 >> ${logdest}
 }
 
 if [ -f ${FILE} ]; then
