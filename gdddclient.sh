@@ -1,5 +1,10 @@
 #!/bin/bash
-# Get godaddy api key https://developer.godaddy.com/keys
+# This script was designed to replace ddclient which works with most
+# hosting providers. Unfortunatly Godaddy has there own API that this
+# script takes advantage of to replicate the ddclient process.
+# I may expand this script to be able to create any entry in Godaddy
+# DNS to allow for a simple way to manage DNS.
+# Get godaddy api key from https://developer.godaddy.com/keys
 # Make sure to chmod a+x this file before executing.
 
 logdate=$(date +%y%m%d_%H%M%S)
