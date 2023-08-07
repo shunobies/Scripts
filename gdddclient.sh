@@ -2,10 +2,22 @@
 # Get godaddy api key https://developer.godaddy.com/keys
 # Make sure to chmod a+x this file before executing.
 
-FILE="gdddclient.conf"
 logdate=$(date -u)
-logdest="gdddclient.log"
 
+if [ -f "~/.conf" ]; then
+	FILE="~/.conf/gdddclient.conf"
+else
+	makedir=$(mkdir ~/.conf)
+	FILE="~/.conf/gdddclient.conf"
+fi
+
+# Check if directory exists
+if [ -f "~/.log" ]; then
+	logdest="~/.log/gdddclient.log"
+else
+	makeDir=$(mkdir ~/.log)
+	logdest="~/.log/gdddclient.log"
+fi
 
 if [ -f ${FILE} ]; then
 	mapfile -t array <$FILE
@@ -45,7 +57,7 @@ if [ -f ${FILE} ]; then
 
 	is_in_cron='gdddclient.sh'
 	cron_entry=$(crontab -l 2>&1) || exit
-	new_cron_entry='*/10 * * * *    ~/gdddclient.sh > /dev/null'
+	new_cron_entry='*/10 * * * *    ~/Scripts/gdddclient.sh > /dev/null'
 
 	if [[ "$cron_entry" != *"$is_in_cron"* ]]; then
 		printf '%s\n' "$cron_entry" "$new_cron_entry" | crontab -
@@ -60,5 +72,5 @@ else
 	read -p 'API Secret: ' apisecret
 	echo ${apikey} >> ${FILE}
 	echo ${apisecret} >> ${FILE}
-	echo "Log file located at /var/log/gdddclient.log"
+	echo "Log file located at ${logdest}"
 fi
