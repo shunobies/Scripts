@@ -21,7 +21,7 @@ else
 	logdest="${rootDir}gdddclient.log"
 fi
 
-function actions () {
+function actions {
 	mapfile -t array <$FILE
 	domain=${array[0]}
 	name=${array[1]}
@@ -68,7 +68,7 @@ function actions () {
 
 if [ -f ${FILE} ]; then
 	# Execute function and log any errors that may occur during the cronjob run.
-	actions 2>&1 >> $logdest
+	actions 1>&2 >> $logdest
 else
 	touch ${FILE}
 	read -p 'Domain Name: ' mydomain
@@ -81,5 +81,5 @@ else
 	echo ${apisecret} >> ${FILE}
 	echo "Log file located at ${logdest}"
 	# Execute function and log any errors that may occur during the cronjob run.
-	actions 2>&1 >> $logdest
+	actions 1>&2 >> $logdest
 fi
