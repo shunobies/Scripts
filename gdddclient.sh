@@ -3,13 +3,13 @@
 # Make sure to chmod a+x this file before executing.
 
 logdate=$(date -u)
-rootDir="gdddclient/"
 currentPath=$(pwd)
 if [[ $currentPath =~ "Scripts" ]]; then
 	echo "Path is fine"
 else
 	currentPath=${pwd}"/Scripts/"
 fi
+rootDir=${currentPath}"gdddclient/"
 
 # Check if directory exists
 if [ -d ${rootDir} ]; then
@@ -23,8 +23,9 @@ fi
 
 function actions {
 	# Log Run
-	exec 1> ${logdest} 2>&1
-	set -x
+	exec 3>&1 4>&2
+	trap 'exec 2>&4 1>&3' 0 1 2 3
+	exec 1>$logdest 2>&1
 
 	mapfile -t array <$FILE
 	domain=${array[0]}
