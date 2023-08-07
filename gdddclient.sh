@@ -3,6 +3,7 @@
 # Make sure to chmod a+x this file before executing.
 
 logdate=$(date -u)
+cd ~
 currentPath=$(pwd)
 if [[ $currentPath =~ "Scripts" ]]; then
 	echo "Path is fine"
