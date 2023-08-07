@@ -3,8 +3,8 @@
 # Make sure to chmod a+x this file before executing.
 
 logdate=$(date -u)
-confDir="~/.conf"
-logDir="~/.log"
+confDir= "~/.conf"
+logDir= "~/.log"
 
 if [ -d ${confDir} ]; then
 	FILE="${confDir}/gdddclient.conf"
