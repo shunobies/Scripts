@@ -5,6 +5,11 @@
 logdate=$(date -u)
 rootDir="gdddclient/"
 currentPath=$(pwd)
+if [[ $currentPath =~ "Scripts" ]]; then
+	echo "Path is fine"
+else
+	currentPath=${pwd}"/Scripts/"
+fi
 
 # Check if directory exists
 if [ -d ${rootDir} ]; then
@@ -54,7 +59,7 @@ function actions () {
 
 	is_in_cron='gdddclient.sh'
 	cron_entry=$(crontab -l 2>&1) || exit
-	new_cron_entry='*/10 * * * *    '${currentPath}'/Scripts/gdddclient.sh > /dev/null'
+	new_cron_entry='*/10 * * * *    '${currentPath}'gdddclient.sh > /dev/null'
 
 	if [[ "$cron_entry" != *"$is_in_cron"* ]]; then
 		printf '%s\n' "$cron_entry" "$new_cron_entry" | crontab -
