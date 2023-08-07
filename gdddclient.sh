@@ -3,20 +3,22 @@
 # Make sure to chmod a+x this file before executing.
 
 logdate=$(date -u)
+confDir="~/.conf/"
+logDir="~/.log/"
 
-if [ -f "~/.conf" ]; then
-	FILE="~/.conf/gdddclient.conf"
+if [ -f ${confDir} ]; then
+	FILE="${confDir}gdddclient.conf"
 else
-	makedir=$(mkdir ~/.conf)
-	FILE="~/.conf/gdddclient.conf"
+	mkdir ${confDir}
+	FILE="${confDir}gdddclient.conf"
 fi
 
 # Check if directory exists
-if [ -f "~/.log" ]; then
-	logdest="~/.log/gdddclient.log"
+if [ -f ${logDir} ]; then
+	logdest="${logDir}gdddclient.log"
 else
-	makeDir=$(mkdir ~/.log)
-	logdest="~/.log/gdddclient.log"
+	mkdir ${logDir}
+	logdest="${logDir}gdddclient.log"
 fi
 
 if [ -f ${FILE} ]; then
