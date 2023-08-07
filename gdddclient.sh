@@ -2,7 +2,7 @@
 # Get godaddy api key https://developer.godaddy.com/keys
 # Make sure to chmod a+x this file before executing.
 
-logdate=$(date -u)
+logdate=$(date +%y%m%d_%H%M%S)
 cd "$(dirname ${BASH_SOURCE[0]})"
 currentPath=$(pwd)"/"
 if [[ $currentPath =~ "Scripts" ]]; then
