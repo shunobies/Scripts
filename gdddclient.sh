@@ -15,7 +15,7 @@ else
 	logdest="${rootDir}gdddclient.log"
 fi
 
-if [ -f ${FILE} ]; then
+function actions () {
 	mapfile -t array <$FILE
 	domain=${array[0]}
 	name=${array[1]}
@@ -58,6 +58,10 @@ if [ -f ${FILE} ]; then
 	if [[ "$cron_entry" != *"$is_in_cron"* ]]; then
 		printf '%s\n' "$cron_entry" "$new_cron_entry" | crontab -
 	fi
+}
+
+if [ -f ${FILE} ]; then
+	actions
 else
 	touch ${FILE}
 	read -p 'Domain Name: ' mydomain
@@ -69,4 +73,5 @@ else
 	echo ${apikey} >> ${FILE}
 	echo ${apisecret} >> ${FILE}
 	echo "Log file located at ${logdest}"
+	actions
 fi
