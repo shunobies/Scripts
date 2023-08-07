@@ -4,7 +4,7 @@
 
 logdate=$(date -u)
 cd "$(dirname ${BASH_SOURCE[0]})"
-currentPath=$(pwd)
+currentPath=$(pwd)"/"
 if [[ $currentPath =~ "Scripts" ]]; then
 	echo "Path is fine"
 else
