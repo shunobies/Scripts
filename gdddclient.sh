@@ -22,6 +22,11 @@ else
 fi
 
 function actions {
+	# Log Run
+	exec 3>&1 4>&2
+	trap 'exec 2>&4 1>&3' 0 1 2 3
+	exec 1>${logdest} 2>&1
+
 	mapfile -t array <$FILE
 	domain=${array[0]}
 	name=${array[1]}
@@ -67,8 +72,7 @@ function actions {
 }
 
 if [ -f ${FILE} ]; then
-	# Execute function and log any errors that may occur during the cronjob run.
-	actions 1>&2 >> $logdest
+	actions
 else
 	touch ${FILE}
 	read -p 'Domain Name: ' mydomain
@@ -81,5 +85,5 @@ else
 	echo ${apisecret} >> ${FILE}
 	echo "Log file located at ${logdest}"
 	# Execute function and log any errors that may occur during the cronjob run.
-	actions 1>&2 >> $logdest
+	actions
 fi
